@@ -30,7 +30,7 @@ jobs:
                   GOOS=linux GOARCH=amd64 go build -o bin/chore_thing-amd64-linux
 
             - name: Upload Windows artifact
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v4
               with:
                   name: chore_thing-amd64.exe
                   path: bin/chore_thing-amd64.exe
