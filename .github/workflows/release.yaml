@@ -3,7 +3,7 @@ name: Release
 on:
     push:
         tags:
-            - "v*" # This will trigger the workflow for tags that start with 'v'
+            - "v*"
 
 jobs:
     build:
@@ -34,6 +34,7 @@ jobs:
               uses: softprops/action-gh-release@v1
               with:
                   tag_name: ${{ github.ref }}
+                  release_name: ${{ github.ref_name }}
                   files: |
                       bin/chore_thing-amd64.exe
                       bin/chore_thing-amd64-linux
