@@ -19,15 +19,24 @@ jobs:
             - name: Set up Go
               uses: actions/setup-go@v2
               with:
-                  go-version: "1.24.1"
+                  go-version: "1.20" # Specify the Go version you want to use
 
-            - name: Run build script
+            - name: Build for Windows
               run: |
-                  chmod +x build.sh  # Make sure the script is executable
-                  ./build.sh  # Run your build script
+                  GOOS=windows GOARCH=amd64 go build -o bin/chore_thing-amd64.exe -ldflags "-H=windowsgui"
 
-            - name: Upload Artifacts
+            - name: Build for Linux
+              run: |
+                  GOOS=linux GOARCH=amd64 go build -o bin/chore_thing-amd64-linux
+
+            - name: Upload Windows artifact
               uses: actions/upload-artifact@v2
               with:
-                  name: binaries
-                  path: bin/
+                  name: chore_thing-amd64.exe
+                  path: bin/chore_thing-amd64.exe
+
+            - name: Upload Linux artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: chore_thing-amd64-linux
+                  path: bin/chore_thing-amd64-linux
